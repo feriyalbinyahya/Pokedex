@@ -1,11 +1,11 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, FlatList, ActivityIndicator, Pressable} from 'react-native';
 import Card from '../components/Card';
 import generalStyles from '../styles/generalStyles';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import { height } from '../assets/constants';
-const PokemonLibrary = () => {
+const PokemonLibrary = ({navigation}) => {
   const [pokemons, setPokemons] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const  [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,10 @@ const PokemonLibrary = () => {
 
   const renderItem = ({item}) => {
     return(
-      <Card name={item.name} />
+      <Pressable onPress={() =>
+        navigation.navigate('PokemonDetail', {uri: item.url})}>
+        <Card name={item.name} />
+      </Pressable>
     );
   }
 
@@ -47,7 +50,7 @@ const PokemonLibrary = () => {
   return (
     <>
       <View style={generalStyles.container}>
-        <Text style={generalStyles.heading}>Pokedex</Text>
+        <Text style={generalStyles.heading}>Pokemon Library</Text>
         <Text style={generalStyles.subHeading}>
           Search for Pokémon by name or using the National Pokédex number.
         </Text>

@@ -16,9 +16,9 @@ export default StyleSheet.create({
     },
     heading: {
         fontSize: 32,
-        fontWeight: '700',
+        fontWeight: '600',
         color: textColor.black,
-        ...fontFamily.bold,
+        ...fontFamily.bold
     },
     subHeading: {
         fontSize: 14,

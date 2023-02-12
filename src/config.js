@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://dummyjson.com/auth';
+export const LOGIN_URL = 'https://dummyjson.com/auth/login';
