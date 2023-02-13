@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ImageBackground, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Image, ImageBackground, ActivityIndicator, ScrollView } from 'react-native'
 import React from 'react'
 import axios from 'axios';
 import {useState, useEffect} from 'react';
@@ -10,6 +10,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper'
 import AbilityPokemon from '../components/AbilityPokemon';
 import { ProgressBar } from 'react-native-paper';
+import { height } from '../assets/constants';
+import pokemonDetailApi from '../api/pokemonDetailApi';
 
 const PokemonDetail = ({navigation, route}) => {
     const [pokeData, setPokeData] = useState([]);
@@ -40,14 +42,10 @@ const PokemonDetail = ({navigation, route}) => {
 
     const pokeFun = async() => {
         setIsLoading(true);
-        await getPokemonDetail();
+        const result = await pokemonDetailApi(route.params.uri);
+        setPokeData(result);
+        setBackColor(result.types[0].type.name);
         setIsLoading(false);
-    }
-    const getPokemonDetail = async () => {
-        const uri = route.params.uri;
-        const result = await axios.get(uri);
-        setPokeData(result.data);
-        setBackColor(result.data.types[0].type.name);
     }
     
     useEffect(() => {
@@ -94,7 +92,7 @@ const PokemonDetail = ({navigation, route}) => {
                     </View>
                     <View style={{height:20}}></View>
                     <View style={styles.boxAbilities}>
-                    <Text style={{...generalStyles.fontBold, fontSize: 16, color: textColor.grey}}>Abilities</Text>
+                        <Text style={{...generalStyles.fontBold, fontSize: 16, color: textColor.grey}}>Abilities</Text>
                         <View style={{flexDirection: 'row'}}>
                             {pokeData.abilities.map((item) => {
                             return <AbilityPokemon key={item.ability.slot} text={item.ability.name} color='#FD8A8A'/>
@@ -132,9 +130,15 @@ const PokemonDetail = ({navigation, route}) => {
                         </View>
                     </View>
                 </View>
-                <View>
-                    <Text>Slide2</Text>
-                    <ProgressBar progress={0.5} color='black' />
+                <View style={styles.boxMoves}>
+                    <Text style={{...generalStyles.fontBold, fontSize: 16, color: textColor.grey}}>Moves</Text>
+                    <ScrollView>
+                        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                            {pokeData.moves.map((item) => {
+                            return <AbilityPokemon key={item.move.name} text={item.move.name} color='#FD8A8A'/>
+                            })}
+                        </View>
+                    </ScrollView>
                 </View>
             </Swiper>
 
@@ -180,6 +184,15 @@ const styles = StyleSheet.create({
         borderWidth:1,
         marginHorizontal: 20,
         padding: 10
+    },
+    boxMoves: {
+        borderColor: '#B2B2B2',
+        borderRadius: 5,
+        borderWidth:1,
+        marginHorizontal: 25,
+        marginTop: 20,
+        padding: 10,
+        height: height/1.85
     },
     boxStats:{
         padding: 15,

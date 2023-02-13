@@ -45,6 +45,7 @@ const textColor = {
   black: '#17171B',
   grey: '#747476',
   number: 'rgba(23, 23, 27, 0.6)',
+  softGrey: '#B2B2B2',
 };
 
 const customColor = {
