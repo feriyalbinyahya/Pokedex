@@ -15,7 +15,6 @@ const PokemonLibrary = ({navigation}) => {
     const uri = 'https://pokeapi.co/api/v2/pokemon/?limit=10&offset='+`${currentPage}`;
     axios.get(uri)
     .then(res => {
-      console.log(uri);
       setPokemons([...pokemons, ...res.data.results]);
   
     });

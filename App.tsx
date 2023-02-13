@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   return (
     <AuthProvider>
-      <StatusBar backgroundColor="#06bcee" />
+      <StatusBar/>
       <Navigation />
     </AuthProvider>
   );

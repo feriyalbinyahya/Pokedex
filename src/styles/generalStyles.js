@@ -25,14 +25,23 @@ export default StyleSheet.create({
         color: textColor.grey,
         ...fontFamily.regular,
     },
+    text: {
+        fontSize: 12,
+        ...fontFamily.regular
+    },
     title: {
-        fontSize: 26,
+        fontSize: 24,
         color: textColor.white,
         ...fontFamily.bold,
     },
     buttonWhite: {
         fontSize: 12,
         color: textColor.white,
+        ...fontFamily.bold
+    },
+    buttonBlack: {
+        fontSize: 12,
+        color: textColor.black,
         ...fontFamily.bold
     },
     fontRegular: {

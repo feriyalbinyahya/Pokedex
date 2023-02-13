@@ -7,7 +7,6 @@ const Card = (props) => {
   return (
     <View style={{...styles.card, backgroundColor: backgroundColors.grass}}>
       <View>
-        <Text>#001</Text>
         <Text style={generalStyles.title}>{props.name}</Text>
       </View>
     </View>
@@ -19,6 +18,7 @@ export default Card
 const styles = StyleSheet.create({
     card: {
         marginVertical: 10,
-        padding: 10
+        padding: 10,
+        alignItems: 'center'
     }
 })

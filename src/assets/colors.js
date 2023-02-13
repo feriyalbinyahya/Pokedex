@@ -49,5 +49,7 @@ const textColor = {
 
 const customColor = {
   input: '#F2F2F2',
+  pink: '#FD8A8A',
+
 };
 export {colors, backgroundColors, textColor, customColor};
