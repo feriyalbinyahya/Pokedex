@@ -25,7 +25,6 @@ const backgColor = {
 };
 
 const TypesPokemon = ({text}) => {
-  console.log(text);
   return (
     <View style={{...styles.container, backgroundColor: backgColor[text]}}>
       <Text style={styles.textTypes}>{text}</Text>

@@ -1,21 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, Text, View, FlatList, Image, ScrollView, Pressable, Alert} from 'react-native';
 import { customColor, textColor } from '../assets/colors';
-import Card from '../components/Card';
 import generalStyles from '../styles/generalStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { WebView } from 'react-native-webview';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CustomButton from '../components/CustomButton';
 import { POKEMON_DETAIL_URL } from '../config';
 import Snackbar from 'react-native-snackbar';
+import { useIsFocused } from "@react-navigation/core";
 const HomeScreen = ({navigation}) => {
   const [allPokemon, setAllPokemon] = useState([]);
+  const isFocused = useIsFocused();
 
   const addPokemonToList = async () => {
     const allKeys = await AsyncStorage.getAllKeys();
     allKeys.pop();
-    console.log(allKeys);
+    allKeys.pop();
     let allPoke = []
     let j=Math.floor(allKeys.length/3);
     for(let i=0; i<j; i++){
@@ -25,7 +25,6 @@ const HomeScreen = ({navigation}) => {
       temp["name"] = allKeys[i+j];
       temp["image"] = allKeys[i+j+j];
       allPoke.push(temp);
-      console.log(allPoke);
     }
     setAllPokemon(allPoke);
   }
@@ -62,8 +61,7 @@ const HomeScreen = ({navigation}) => {
 
   useEffect(() => {
     addPokemonToList();
-    console.log(allPokemon);
-}, []);
+}, [isFocused]);
   return (
     <ScrollView>
       <View style={generalStyles.container}>
@@ -75,31 +73,32 @@ const HomeScreen = ({navigation}) => {
         </View>
         <View style={{height: 20}}></View>
       </View>
-      <Text style={{...generalStyles.heading, color:textColor.grey, marginHorizontal: 30}}>My Pokemon</Text>
-      <Text style={{...styles.textNoPokemon, marginHorizontal: 30}}>You have a saved group of Pokemon.</Text>
-      {allPokemon ?
+      <Text style={{...generalStyles.heading, color:textColor.grey, marginHorizontal: 30, fontSize: 24}}>My Pokemon</Text>
+      {allPokemon.length>0 ?
       <View>
+        <Text style={{...styles.textNoPokemon, marginHorizontal: 30}}>You have a saved group of Pokemon.</Text>
         {allPokemon?.map((item) => {
           return (
             <View style={{flexDirection: 'row'}}>
               <Pressable style={{flex:5}} onPress={() =>
                 navigation.navigate('PokemonDetail', {uri: POKEMON_DETAIL_URL+item.id})}>
                 <View style={styles.cardPokemon}>
-                    <Image style={{width: 80, height: 80}} source={{uri: item.image}} />
+                    <Image style={{width: 60, height: 60}} source={{uri: item.image}} />
                     <Text style={styles.nameMyPokemon} >{item.name}</Text>
                 </View>
               </Pressable>
-              <Ionicons onPress={() => showAlert1(item.name, item.id, item.image)} style={{flex: 1, marginTop: 50}} name='trash' size={20} color='red' />
+              <Ionicons onPress={() => showAlert1(item.name, item.id, item.image)} style={{flex: 1, marginTop: 40}} name='trash' size={20} color='red' />
             </View>
           );
         })}
+        <View style={{height: 20}}></View>
       </View> :
       <View style={{alignItems:'center'}}>
-        <View style={{height: 10}}></View>
+        <View style={{height: 40}}></View>
         <Ionicons name='leaf-outline' size={36} color={textColor.softGrey} />
         <View style={{height: 10}}></View>
         <Text style={styles.textNoPokemon}>You don't have pokemon.</Text>
-        <Text style={styles.textNoPokemon}>Get it in "Get Your Pokemon"</Text>
+        <Text style={styles.textNoPokemon}>Get it in "Get"</Text>
       </View>
       }
     </ScrollView>
@@ -116,6 +115,7 @@ const styles = StyleSheet.create({
   },
   textNoPokemon: {
     ...generalStyles.fontRegular,
+    fontSize: 13,
     color: textColor.softGrey,
   },
   cardPokemon:{
@@ -127,12 +127,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 25,
     flex:3,
-    marginVertical: 20
+    marginVertical: 10
   },
   nameMyPokemon: {
     ...generalStyles.fontBold,
-    fontSize: 20,
+    fontSize: 16,
     color: customColor.pink,
-    width: 120
+    width: 180,
+    marginLeft: 15,
+    marginVertical: 10
   }
 });

@@ -66,6 +66,7 @@ export const AuthProvider = ({children}) => {
             setIsLoading(false);
         }).catch((e) => {
             setIsLoggin("false");
+            AsyncStorage.setItem('isLoggin', "false");
             console.log(`login error ${e}`);
             setIsLoading(false);
         });

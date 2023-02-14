@@ -4,7 +4,6 @@ import generalStyles from '../styles/generalStyles'
 import { colors } from '../assets/colors';
 
 const AbilityPokemon = ({text, color}) => {
-  console.log(text);
   return (
     <View style={{...styles.container, backgroundColor: color}}>
       <Text style={styles.textTypes}>{text}</Text>

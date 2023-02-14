@@ -37,7 +37,7 @@ const TabNavigationScreen = () => {
   return (
     <>
     <Spinner visible={isLoading} />
-      <Dialog.Container visible={visible}>
+      <Dialog.Container contentStyle={{backgroundColor: 'white'}} visible={visible}>
         <Dialog.Title style={generalStyles.fontBold}>Logout</Dialog.Title>
         <Dialog.Description style={generalStyles.fontRegular}>
           Do you want to log out?
@@ -57,7 +57,7 @@ const TabNavigationScreen = () => {
               iconName = 'library';
             }else if (route.name === 'Profil'){
               iconName = 'person';
-            }else if (route.name === 'Get Your Pokemon'){
+            }else if (route.name === 'Get'){
               iconName = 'help-circle';
             }
 
@@ -65,20 +65,23 @@ const TabNavigationScreen = () => {
             return <Ionicons name={iconName}  size={size} color={color} />;
           },
           headerTitle: 'Pokedex',
+          headerTitleStyle: {fontFamily: "Poppins-Bold", color: customColor.blue},
           headerRight: () => {
             if(route.name == 'Profil'){
               return(
-                <Ionicons name='log-out' onPress={showDialog} size={30} style={{padding: 12}} />
+                <Ionicons color={customColor.blue} name='log-out' onPress={showDialog} size={30} style={{padding: 12}} />
               );
             }
           },
+          tabBarLabelStyle: {fontFamily: "Poppins-Regular"},
+          tabBarStyle: {paddingVertical: 5},
           tabBarActiveTintColor: customColor.blue,
           tabBarInactiveTintColor: 'gray',
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Library" component={PokemonLibrary} />
-        <Tab.Screen name="Get Your Pokemon" component={GetPokemon} />
+        <Tab.Screen name="Get" component={GetPokemon} />
         <Tab.Screen name="Profil" component={ProfilScreen} />
       </Tab.Navigator>
     </>

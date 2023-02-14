@@ -7,6 +7,7 @@ import Dialog from "react-native-dialog";
 import Snackbar from 'react-native-snackbar';
 import generalStyles from '../styles/generalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { textColor } from '../assets/colors';
 
 const GetPokemon = () => {
   const [yourPoke, setYourPoke] = useState([]);
@@ -72,7 +73,7 @@ const GetPokemon = () => {
 
   return (
     <View style={{alignItems: 'center'}}>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container contentStyle={{backgroundColor: 'white'}} visible={visible}>
         <Dialog.Title style={generalStyles.fontBold}>This is your new pokemon!</Dialog.Title>
         <Dialog.Description style={generalStyles.fontRegular}>
           Do you want to save this to your pokemon?
@@ -93,6 +94,11 @@ const GetPokemon = () => {
       <View style={{height: 30}}></View>
       <View style={{width: 180}}>
         <CustomButton onPress={handleGetPokemon} text='Get Pokemon' />
+      </View>
+      <View style={{alignItems: 'center', width: 180, marginVertical: 30}}>
+        <Text style={{...generalStyles.fontRegular, color: textColor.softGrey, fontSize: 12, textAlign: 'center'}}>
+          Save the pokemon that you've got to keep it in your bag. Release it if you don't want to save.
+          </Text>
       </View>
       <ActivityIndicator animating = {animating} color = 'grey' size = "large"
         style = {styles.activityIndicator}/>

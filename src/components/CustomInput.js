@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import generalStyles from '../styles/generalStyles'
+import { textColor } from '../assets/colors'
 
 const CustomInput = ({value, setValue, placeholder, secureTextEntry}) => {
   return (
     <View style={styles.container}>
       <TextInput
+      placeholderTextColor={textColor.softGrey}
        placeholder={placeholder} 
        style={styles.input}
        value={value}
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     input: {
-        ...generalStyles.fontRegular
+        ...generalStyles.fontRegular,
+        color: textColor.grey
     }
 })

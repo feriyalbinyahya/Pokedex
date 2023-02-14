@@ -79,15 +79,15 @@ const PokemonDetail = ({navigation, route}) => {
                     <View style={styles.generalInfo}>
                         <View style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 1}}>
                             <Text style={generalStyles.buttonBlack}>Base exp.</Text>
-                            <Text style={{...generalStyles.text, marginLeft:6}}>{pokeData.base_experience}</Text>
+                            <Text style={{...generalStyles.text, marginLeft:6, marginTop: 1, color: textColor.grey}}>{pokeData.base_experience}</Text>
                         </View>
                         <View style={{flexDirection: 'row',  marginHorizontal: 10}}>
                             <Ionicons name='barbell' size={20} color='black'/>
-                            <Text style={{...generalStyles.text, marginLeft:5, marginTop: 1}}>{parseFloat(pokeData.weight/10)} kg</Text>
+                            <Text style={{...generalStyles.text, marginLeft:5, marginTop: 1, color: textColor.grey}}>{parseFloat(pokeData.weight/10)} kg</Text>
                         </View>
                         <View style={{flexDirection: 'row',  marginHorizontal: 10}}>
                             <Ionicons name='arrow-up' size={20} color='black'/>
-                            <Text style={{...generalStyles.text, marginLeft:5, marginTop: 1}}>{parseFloat(pokeData.height/10)} m</Text>
+                            <Text style={{...generalStyles.text, marginLeft:5, marginTop: 1, color: textColor.grey}}>{parseFloat(pokeData.height/10)} m</Text>
                         </View>
                     </View>
                     <View style={{height:20}}></View>

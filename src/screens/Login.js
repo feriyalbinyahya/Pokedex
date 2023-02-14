@@ -14,6 +14,7 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const {isLoading, login, isLoggin, loginNew} = useContext(AuthContext);
+    const [isWrong, setIsWrong] = useState(false);
 
 
     return (
@@ -37,13 +38,13 @@ const Login = () => {
                 }
                 await loginNew(username, password);
                 if(isLoggin == "false"){
-                    Snackbar.show({
-                        text: 'Username or password is wrong',
-                        backgroundColor: 'red',
-                        duration: Snackbar.LENGTH_SHORT,
-                    });
+                    setIsWrong(true);
+
                 }
             }} />
+            <View style={{height:15}}></View>
+            {isWrong? <Text style={{...generalStyles.fontRegular, color: 'red'}}>
+                Username or password is wrong</Text> : ''}
         </View>
     );
 }
