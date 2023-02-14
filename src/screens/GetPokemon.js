@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Image, ActivityIndicator, Button } from 'react-native'
 import React, {useState} from 'react'
 import CustomButton from '../components/CustomButton'
 import pokemonDetailApi from '../api/pokemonDetailApi';
@@ -92,7 +92,11 @@ const GetPokemon = () => {
       <Image style={{width: 120, height: 120}} source={require('../assets/Images/pokeball.png')} />
       <View style={{height: 30}}></View>
       <View style={{width: 180}}>
-        <CustomButton onPress={handleGetPokemon} text='Get Pokemon' />
+        <Button
+          title="Get Pokemon"
+          onPress={handleGetPokemon}
+          disabled={animating}
+        />
       </View>
       <View style={{alignItems: 'center', width: 180, marginVertical: 30}}>
         <Text style={{...generalStyles.fontRegular, color: textColor.softGrey, fontSize: 12, textAlign: 'center'}}>

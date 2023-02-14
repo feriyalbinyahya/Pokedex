@@ -16,12 +16,10 @@ const HomeScreen = ({navigation}) => {
     const allKeys = await AsyncStorage.getAllKeys();
     allKeys.pop();
     allKeys.pop();
-    console.log(allKeys);
     let allPoke = []
     for(let i=0; i<allKeys.length; i++){
       let temp;
       temp = await AsyncStorage.getItem(allKeys[i]);
-      console.log(temp);
       temp = JSON.parse(temp);
       allPoke.push(temp);
     }
@@ -62,7 +60,7 @@ const HomeScreen = ({navigation}) => {
     addPokemonToList();
 }, [isFocused]);
   return (
-    <ScrollView>
+    <ScrollView overScrollMode='never' removeClippedSubviews={true}>
       <View style={generalStyles.container}>
         <View style={{width:'100%', height: 300, borderRadius: 10}}>
           <WebView

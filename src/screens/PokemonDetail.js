@@ -65,7 +65,7 @@ const PokemonDetail = ({navigation, route}) => {
                 </Text>
                 <View style={{flexDirection: 'row'}}>
                     {pokeData?.types?.map((item) => {
-                        return <TypesPokemon key={item.slot} text={item.type.name} /> 
+                        return <TypesPokemon key={item.slot.toString()+"type"+pokeData.name} text={item.type.name} /> 
                     })}
                 </View>
             </View>
@@ -95,7 +95,7 @@ const PokemonDetail = ({navigation, route}) => {
                         <Text style={{...generalStyles.fontBold, fontSize: 16, color: textColor.grey}}>Abilities</Text>
                         <View style={{flexDirection: 'row'}}>
                             {pokeData.abilities.map((item) => {
-                            return <AbilityPokemon key={item.ability.slot} text={item.ability.name} color='#FD8A8A'/>
+                            return <AbilityPokemon key={item.slot+item.ability.name} text={item.ability.name} color='#FD8A8A'/>
                             })}
                         </View>
                     </View>
@@ -135,7 +135,7 @@ const PokemonDetail = ({navigation, route}) => {
                     <ScrollView>
                         <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
                             {pokeData.moves.map((item) => {
-                            return <AbilityPokemon key={item.move.name} text={item.move.name} color='#FD8A8A'/>
+                            return <AbilityPokemon key={item.move.url} text={item.move.name} color='#FD8A8A'/>
                             })}
                         </View>
                     </ScrollView>
