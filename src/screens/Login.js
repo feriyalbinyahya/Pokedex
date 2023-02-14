@@ -13,7 +13,7 @@ import generalStyles from '../styles/generalStyles';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const {isLoading, login, isLoggin} = useContext(AuthContext);
+    const {isLoading, login, isLoggin, loginNew} = useContext(AuthContext);
 
 
     return (
@@ -35,7 +35,7 @@ const Login = () => {
                     });
                     return;
                 }
-                await login(username, password);
+                await loginNew(username, password);
                 if(isLoggin == "false"){
                     Snackbar.show({
                         text: 'Username or password is wrong',

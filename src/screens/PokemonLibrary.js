@@ -5,6 +5,7 @@ import generalStyles from '../styles/generalStyles';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import { height } from '../assets/constants';
+import { textColor } from '../assets/colors';
 const PokemonLibrary = ({navigation}) => {
   const [pokemons, setPokemons] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -49,10 +50,11 @@ const PokemonLibrary = ({navigation}) => {
   return (
     <>
       <View style={generalStyles.container}>
-        <Text style={generalStyles.heading}>Pokemon Library</Text>
+        <Text style={{...generalStyles.heading, color: textColor.grey}}>Pokemon Library</Text>
         <Text style={generalStyles.subHeading}>
-          Search for Pokémon by name or using the National Pokédex number.
+          The list of Pokémon by name.
         </Text>
+        <View style={{height:5}}></View>
         <FlatList 
           data={pokemons} 
           renderItem={renderItem}

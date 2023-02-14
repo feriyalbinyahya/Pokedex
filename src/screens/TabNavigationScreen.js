@@ -1,6 +1,6 @@
 
 import React, {useState, useContext} from 'react';
-import {Text, View, StatusBar, SafeAreaView, Button} from 'react-native';
+import {Text, View, StatusBar, SafeAreaView, Button, Alert} from 'react-native';
 import { textColor } from './src/assets/colors';
 import HomeScreen from './HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,6 +13,7 @@ import Dialog from "react-native-dialog";
 import generalStyles from '../styles/generalStyles';
 import { AuthContext } from '../context/AuthContext';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
+import { customColor } from '../assets/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -71,7 +72,7 @@ const TabNavigationScreen = () => {
               );
             }
           },
-          tabBarActiveTintColor: 'tomato',
+          tabBarActiveTintColor: customColor.blue,
           tabBarInactiveTintColor: 'gray',
         })}
       >

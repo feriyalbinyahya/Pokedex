@@ -55,7 +55,7 @@ const PokemonDetail = ({navigation, route}) => {
     <>
         {pokeData?.sprites ? 
         <>
-            <View style={{flex:1, flexDirection:'row', backgroundColor: backgColor[backColor]}}>
+        <View style={{flex:1, flexDirection:'row', backgroundColor: backgColor[backColor]}}>
             <Image style={{width: 180, height: 180}} source={ (pokeData.sprites) ? 
             { uri: pokeData.sprites.front_default } : require('../assets/Images/pokeball.png')} />
             <View style={{flex:1}}>
@@ -146,14 +146,15 @@ const PokemonDetail = ({navigation, route}) => {
             <View style={styles.footerComponent}>
                 <View style={{flex: 1}}></View>
                 <View style={{...styles.box, backgroundColor: backgColor[backColor]}}>
-                    <View style={{alignItems:'center', marginTop: 8}}>
-                        <IconButton icon='add-circle' text='Add to libraries' />
-                    </View>
                 </View>
                 <View style={{flex: 1}}></View>
             </View>
         </View>
-        </> : <ActivityIndicator size='large' style={{marginTop: 100}} />}
+        </> : <View style={{alignItems: 'center'}}>
+                <ActivityIndicator size='large' style={{marginTop: 100}} color={textColor.grey} />
+                <View style={{height:20}}></View>
+                <Text style={{...generalStyles.fontRegular, fontSize: 16}}>Loading...</Text>
+            </View>}
     </>
   )
 }

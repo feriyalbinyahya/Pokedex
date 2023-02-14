@@ -40,9 +40,36 @@ export const AuthProvider = ({children}) => {
                 }
                 setIsLoading(false);
             }).catch(e => {
+                setIsLoggin("false");
                 console.log(`login error ${e}`);
+                setIsLoading(false);
         });
     };
+
+    const loginNew = async (username, password) => {
+        setIsLoading(true);
+        await axios.post(LOGIN_URL, {
+            username: username,
+            password: password,
+        }).then((response) => {
+            if(response.status == "200"){
+                let userInfo = response.data;
+                setUserInfo(userInfo)
+                let storedUserInfo = JSON.stringify(userInfo);
+                setIsLoggin("true");
+                AsyncStorage.setItem('isLoggin', "true");
+                AsyncStorage.setItem('userInfo', storedUserInfo);
+            }else{
+                setIsLoggin("false");
+                AsyncStorage.setItem('isLoggin', "false");
+            }
+            setIsLoading(false);
+        }).catch((e) => {
+            setIsLoggin("false");
+            console.log(`login error ${e}`);
+            setIsLoading(false);
+        });
+    }
 
     const isLoggedIn = async () => {
         try{
@@ -59,9 +86,11 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const logout = () => {
+    const logout = async () => {
         setIsLoading(true);
-        AsyncStorage.removeItem('isLoggin');
+        let allKeys = await AsyncStorage.getAllKeys();
+        AsyncStorage.multiRemove(allKeys, err => {
+          });
         setIsLoggin("false");
         setIsLoading(false);
     }
@@ -76,6 +105,7 @@ export const AuthProvider = ({children}) => {
         userInfo,
         login,
         logout,
+        loginNew,
         isLoggin,
         splashLoading
     }}>{children}</AuthContext.Provider>
