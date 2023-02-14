@@ -53,9 +53,8 @@ const GetPokemon = () => {
         backgroundColor: 'green',
         duration: Snackbar.LENGTH_SHORT,
       });
-      await AsyncStorage.setItem(yourPoke[0], yourPoke[0]);
-      await AsyncStorage.setItem(yourPoke[1], yourPoke[1]);
-      await AsyncStorage.setItem(yourPoke[2], yourPoke[2]);
+      let storedPokeInfo = JSON.stringify({"id": yourPoke[0], "name": yourPoke[1], "image": yourPoke[2]});
+      await AsyncStorage.setItem(yourPoke[0], storedPokeInfo);
     }
   }
 

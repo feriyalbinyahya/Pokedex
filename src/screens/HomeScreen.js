@@ -16,14 +16,13 @@ const HomeScreen = ({navigation}) => {
     const allKeys = await AsyncStorage.getAllKeys();
     allKeys.pop();
     allKeys.pop();
+    console.log(allKeys);
     let allPoke = []
-    let j=Math.floor(allKeys.length/3);
-    for(let i=0; i<j; i++){
-      console.log("masuk");
-      let temp = {"id": '', "name": '', "image": ''};
-      temp["id"] = allKeys[i];
-      temp["name"] = allKeys[i+j];
-      temp["image"] = allKeys[i+j+j];
+    for(let i=0; i<allKeys.length; i++){
+      let temp;
+      temp = await AsyncStorage.getItem(allKeys[i]);
+      console.log(temp);
+      temp = JSON.parse(temp);
       allPoke.push(temp);
     }
     setAllPokemon(allPoke);
@@ -79,7 +78,7 @@ const HomeScreen = ({navigation}) => {
         <Text style={{...styles.textNoPokemon, marginHorizontal: 30}}>You have a saved group of Pokemon.</Text>
         {allPokemon?.map((item) => {
           return (
-            <View style={{flexDirection: 'row'}}>
+            <View key={item.id} style={{flexDirection: 'row'}}>
               <Pressable style={{flex:5}} onPress={() =>
                 navigation.navigate('PokemonDetail', {uri: POKEMON_DETAIL_URL+item.id})}>
                 <View style={styles.cardPokemon}>

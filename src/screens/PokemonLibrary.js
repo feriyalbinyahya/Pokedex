@@ -49,21 +49,23 @@ const PokemonLibrary = ({navigation}) => {
 
   return (
     <>
-      <View style={generalStyles.container}>
-        <Text style={{...generalStyles.heading, color: textColor.grey}}>Pokemon Library</Text>
-        <Text style={generalStyles.subHeading}>
-          The list of Pokémon by name.
-        </Text>
-        <View style={{height:5}}></View>
-        <FlatList 
-          data={pokemons} 
-          renderItem={renderItem}
-          ListFooterComponent={renderLoader}
-          onEndReached={loadMoreItem}
-          onEndReachedThreshold={0}
-          style={styles.flatlistStyle}
-        />
-        </View>
+      {pokemons.length>0 ? 
+        <View style={generalStyles.container}>
+          <Text style={{...generalStyles.heading, color: textColor.grey}}>Pokemon Library</Text>
+          <Text style={generalStyles.subHeading}>
+            The list of Pokémon by name.
+          </Text>
+          <View style={{height:5}}></View>
+          <FlatList 
+            data={pokemons} 
+            renderItem={renderItem}
+            ListFooterComponent={renderLoader}
+            onEndReached={loadMoreItem}
+            onEndReachedThreshold={0}
+            style={styles.flatlistStyle}
+          />
+        </View>      
+      : ''}
     </>
   );
 };
